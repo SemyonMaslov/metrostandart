@@ -6,6 +6,12 @@ name = "pypi"
 [packages]
 django = "*"
 pipenv = "*"
+django-service-objects = "*"
+pypdf2 = "*"
+openpyxl = "*"
+django-sendfile = "*"
+xlrd = "*"
+xlwt = "*"
 
 [dev-packages]
 
