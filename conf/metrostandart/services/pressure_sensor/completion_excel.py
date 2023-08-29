@@ -18,6 +18,7 @@ class CompletionPressureSensorExcelService(Service):
     registry = forms.CharField()
 
     def process(self):
+        self.text = PdfReader(self.cleaned_data['file']).pages[0].extract_text().replace('\n', ' ').replace('_', '')
         self.coppy_excel_file()
         self.completion_excel_file()
         self._create_document()
@@ -32,7 +33,7 @@ class CompletionPressureSensorExcelService(Service):
     def completion_excel_file(self):
         book = openpyxl.open(self.cleaned_data['path'])
         sheet = book.active
-        data = self.colection_data
+        data = self.collection_data
         sheet['C5'].value = data['verification']
         sheet['G5'].value = data['date'][1]
         sheet['E6'].value = data['measuring_instrument']
@@ -45,17 +46,16 @@ class CompletionPressureSensorExcelService(Service):
         book.save(self.cleaned_data['path'])
 
     @property
-    def colection_data(self):
-        text = PdfReader(self.cleaned_data['file']).pages[0].extract_text()
+    def collection_data(self):
         data = {
-            'date': re.findall(r"\b\d{2}\.\d{2}\.\d{4}\b", text),
-            'verification': re.findall(r"(?<=СВИДЕТЕЛЬСТВО О ПОВЕРКЕ).*?(?=\nДействительно)", text)[0][1:],
-            'verifier': re.findall(r"(?<=Поверитель ).*?(?=_)", text)[0],
-            'measuring_instrument': re.findall(r"(?<=; ).*?(?=Рег)", text)[0].split(";")[-2].strip(),
+            'date': re.findall(r"\b\d{2}\.\d{2}\.\d{4}\b", self.text),
+            'verification': re.findall(r"(?<= СВИДЕТЕЛЬСТВО О ПОВЕРКЕ ).*?(?=Действительно)", self.text)[0],
+            'verifier': re.findall(r"(?<=Поверитель ).*?(?=фамилия)", self.text)[0],
+            'measuring_instrument': re.findall(r"(?<=; ).*?(?=; Рег)", self.text)[-1],
             'registry': self.cleaned_data['registry'],
-            'factory_number': re.findall(r"(?<=заводской номер).*?(?=_)", text)[0],
-            'accordance': re.findall(r"(?<=в соответствии с).*?(?=_)", text)[0],
-            'facts': re.findall(r"(?<=факторов:).*?(?=_)", text)[0].strip(),
+            'factory_number': re.findall(r"(?<=заводской номер).*?(?=заводской )", self.text)[0],
+            'accordance': re.findall(r"(?<=поверки в соответствии с).*?(?=наименование или)", self.text)[0],
+            'facts': re.findall(r"(?<=факторов:).*?(?=перечень)", self.text)[0],
         }
         return data
 
