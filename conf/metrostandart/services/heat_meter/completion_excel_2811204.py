@@ -13,7 +13,7 @@ from metrostandart.models import Document
 from metrostandart.utils import collection_data
 
 
-class CompletionThermalResistancePT100Service(Service):
+class CompletionHeatMeter2811204Service(Service):
     file = forms.FileField()
     registry = forms.CharField()
 
@@ -27,9 +27,9 @@ class CompletionThermalResistancePT100Service(Service):
 
     def coppy_excel_file(self):
         source_path = os.path.join(BASE_DIR,
-                                   'data\\thermal_resistance\\Pt100.xlsx')
+                                   'data\\heat_meter\\28112-04.xlsx')
         self.cleaned_data['path'] = os.path.join(BASE_DIR,
-                                                 f"uploads\\thermal_resistance\\thermal_resistance_{datetime.datetime.now().strftime('%Y-%m-%d_%H-%M-%S')}.xlsx")
+                                                 f"uploads\\heat_meter\\heat_meter_{datetime.datetime.now().strftime('%Y-%m-%d_%H-%M-%S')}.xlsx")
         shutil.copy(source_path, self.cleaned_data['path'])
 
     def completion_excel_file(self):
@@ -38,13 +38,13 @@ class CompletionThermalResistancePT100Service(Service):
         data = collection_data(self.text)
         sheet['C5'].value = data['verification']
         sheet['G5'].value = data['date'][1]
-        sheet['C6'].value = data['measuring_instrument']
+        sheet['B6'].value = data['measuring_instrument']
         sheet['C7'].value = data['factory_number']
         sheet['H7'].value = self.cleaned_data['registry']
         sheet['D9'].value = data['accordance']
         sheet['C14'].value = data['facts']
-        sheet['C47'].value = data['date'][1]
-        sheet['C49'].value = data['verifier']
+        sheet['C46'].value = data['date'][1]
+        sheet['C48'].value = data['verifier']
         book.save(self.cleaned_data['path'])
 
     def _create_document(self):

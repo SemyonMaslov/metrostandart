@@ -6,6 +6,9 @@ from django import forms
 from service_objects.services import Service
 
 from metrostandart.models import Registry
+from metrostandart.services.heat_meter.main import MainHeatMeterService
+from metrostandart.services.pressure_gauge.completion_excel import \
+    CompletionPressureGaugeExcelService
 from metrostandart.services.pressure_sensor.completion_excel import CompletionPressureSensorExcelService
 from metrostandart.services.thermal_resistance.completion_excel_100p import CompletionThermalResistance100PService
 from metrostandart.services.thermal_resistance.completion_excel_pt100 import CompletionThermalResistancePT100Service
@@ -36,6 +39,21 @@ class MainService(Service):
                 return CompletionThermalResistance100PService.execute(
                     {'registry': self._get_registry}, {'file': self.cleaned_data['file']}
                 )
+        elif measuring_instrument == 'МАНОМЕТРЫ':
+            return CompletionPressureGaugeExcelService.execute(
+                {'registry': self._get_registry},
+                {'file': self.cleaned_data['file']}
+            )
+        elif measuring_instrument == 'ТЕПЛОСЧЕТЧИК':
+            return MainHeatMeterService.execute(
+                {'registry': self._get_registry},
+                {'file': self.cleaned_data['file']}
+            )
+        elif measuring_instrument == 'ТЕПЛОВЫЧИСЛИТЕЛЬ':
+            return MainHeatMeterService.execute(
+                {'registry': self._get_registry},
+                {'file': self.cleaned_data['file']}
+            )
 
     @property
     @lru_cache()
