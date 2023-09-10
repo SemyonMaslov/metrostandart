@@ -6,6 +6,7 @@ from django import forms
 from service_objects.services import Service
 
 from metrostandart.models import Registry
+from metrostandart.services.gas_meter.main import MainGasMeterService
 from metrostandart.services.heat_calculator.main import \
     MainHeatCalculatorService
 from metrostandart.services.heat_meter.main import MainHeatMeterService
@@ -60,6 +61,11 @@ class MainService(Service):
             )
         elif measuring_instrument == 'ТЕПЛОВЫЧИСЛИТЕЛЬ':
             return MainHeatCalculatorService.execute(
+                {'registry': self._get_registry},
+                {'file': self.cleaned_data['file']}
+            )
+        elif measuring_instrument == 'СЧЕТЧИК ГАЗА':
+            return MainGasMeterService.execute(
                 {'registry': self._get_registry},
                 {'file': self.cleaned_data['file']}
             )
