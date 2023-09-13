@@ -13,7 +13,7 @@ from metrostandart.services.main import MainService
 class RenderHomeView(View):
 
     def get(self, request, *args, **kwargs):
-        return render(request, 'metrostandart/index.html')
+        return render(request, 'metrostandart/index1.html')
 
 
 class DocumentView(View):

@@ -1,0 +1,228 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@600&display=swap');
+
+
+html {
+  font-size: 14px;
+}
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+/* body{
+  background-image: url(img/water.png);
+} */
+
+.container {
+  max-width: 960px;
+}
+
+.pricing-header {
+  max-width: 700px;
+  
+}
+
+.card-deck .card {
+  min-width: 220px;
+}
+
+/* .border-top { border-top: 1px solid #e5e5e5; }
+.border-bottom { border-bottom: 1px solid #e5e5e5; } */
+
+.box-shadow { box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05); }
+
+.my_but{
+  border-radius: 20px;
+  font-size: 18px;
+  font-weight: 600;
+  width: 285px;
+  height: 66px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+}
+
+.my_head{
+  height: 299px;
+  background-image: url("../img/bg_head.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+footer{
+  height: 80px;
+  /* background-image: url(img/my_foot.png);
+  background-size: cover;
+  background-repeat: no-repeat; */
+  background-color: #0064A0;
+}
+
+.my_enter{
+color: white;
+font-weight: bold;
+}
+
+.text-dark{
+  font-weight: 500;
+  font-size: 18px;
+  color: #ffffff;
+}
+
+.enter:hover{
+  color: white;
+  text-decoration: none;
+  }
+
+.text-dark{
+  color: inherit;
+}
+
+.my_form{
+ border: solid 1px rgba(0, 0, 0, 0);
+ width: 425px;
+ height: 550px;
+ background-image: url(../img/bg_form.png);
+ background-repeat: no-repeat;
+ background-position: center;
+ border-top-left-radius: 53px;
+ border-top-right-radius: 105px;
+ border-bottom-right-radius: 53px;
+ border-bottom-left-radius: 105px;
+}
+
+.my_but{
+  list-style: none;
+}
+
+.button-container{
+  margin-top: 50px;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  padding-left: 89px;
+
+}
+
+.zag{
+  font-family: 'Montserrat', sans-serif;
+  margin-top: 50px;
+  text-align: center;
+  color: #ffffff;
+  text-align: center;
+  font-family: Montserrat;
+  font-size: 30px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  width: 417px;
+}
+
+.par{
+  margin-top: 50px;
+  color: #ffffff;
+  font-family: Montserrat;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 119.9%; /* 27.577px */
+  letter-spacing: -0.345px;
+  text-align: center;
+}
+
+.form-button {
+  margin: 10px 0;
+}
+
+.fail_but, .poverka_but{
+height: 68px;
+color: #0064A0;
+font-style: normal;
+font-weight: 600;
+line-height: normal;
+border-radius: 40px 0px 40px 40px;
+border: 2px solid #0669A4;
+background: #FBFEFF;
+/* box-shadow: 0px 1px 5px 0px #FFF; */
+}
+
+.form-button {
+  width: 250px; /* Установите фиксированную ширину для кнопок (например, 150px) */
+}
+
+
+.coper{
+  /* display: flex;
+  justify-content: center; */
+
+  padding-top: 40px;
+  /* vertical-align: center; */
+  text-align: center;
+  font-weight: 700;
+  color: #ffffff;
+}
+/* main{
+  margin-bottom: 50px;
+} */
+
+.input-file {
+	position: relative;
+	display: inline-block;
+	text-align:left;
+}
+.input-file span {
+	position: relative;
+	display: inline-block;
+	cursor: pointer;
+	outline: none;
+	text-decoration: none;
+	font-size: 14px;
+	vertical-align: middle;
+	    color: #0064A0;
+	text-align: center;
+	border-radius: 40px 0px 40px 40px;
+	font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+	height: 68px;
+	padding: 10px 20px;
+	box-sizing: border-box;
+	border: none;
+	margin: 0;
+	transition: background-color 0.2s;
+	width:250px;
+	    border: 2px solid #0669A4;
+    background: #FBFEFF;
+    font-size:18px;
+    text-transform:uppercase;
+    padding-top:19px;
+}
+.input-file input[type=file] {
+	position: absolute;
+	z-index: -1;
+	opacity: 0;
+	display: block;
+	width: 0;
+	height: 0;
+}
+
+/* Focus */
+.input-file input[type=file]:focus + span {
+	box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
+}
+
+/* Hover/active */
+.input-file:hover span {
+	background-color: #0669A4;
+	color: white;
+}
+.input-file:active span {
+	background-color: #2E703A;
+}
+
+/* Disabled */
+.input-file input[type=file]:disabled + span {
+	background-color: #eee;
+}
