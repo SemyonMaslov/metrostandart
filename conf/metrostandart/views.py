@@ -13,7 +13,19 @@ from metrostandart.services.main import MainService
 class RenderHomeView(View):
 
     def get(self, request, *args, **kwargs):
-        return render(request, 'metrostandart/index1.html')
+        return render(request, 'metrostandart/index.html')
+
+
+class RenderLoginView(View):
+
+    def get(self, request, *args, **kwargs):
+        return render(request, 'metrostandart/login.html')
+
+
+class RenderRegisterView(View):
+
+    def get(self, request, *args, **kwargs):
+        return render(request, 'metrostandart/register.html')
 
 
 class DocumentView(View):
@@ -21,6 +33,8 @@ class DocumentView(View):
     def post(self, request):
         try:
             outcome = MainService.execute({}, {'file': request.FILES['file']})
-            return sendfile(request, outcome, attachment=True, attachment_filename=os.path.basename(outcome))
+            return sendfile(request, outcome, attachment=True,
+                            attachment_filename=os.path.basename(outcome))
         except Exception as error:
-            return render(request, 'metrostandart/index.html', context={'error': str(error)})
+            return render(request, 'metrostandart/index.html',
+                          context={'error': str(error)})

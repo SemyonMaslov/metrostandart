@@ -6,6 +6,7 @@ from django import forms
 from service_objects.services import Service
 
 from metrostandart.models import Registry
+from metrostandart.services.flow_meter.main import MainFlowMeterService
 from metrostandart.services.gas_meter.main import MainGasMeterService
 from metrostandart.services.heat_calculator.main import \
     MainHeatCalculatorService
@@ -18,6 +19,19 @@ from metrostandart.services.thermal_resistance.completion_excel_100p import \
     CompletionThermalResistance100PService
 from metrostandart.services.thermal_resistance.completion_excel_pt100 import \
     CompletionThermalResistancePT100Service
+
+SERVICES_DICT = {
+    'ДАТЧИК ДАВЛЕНИЯ': CompletionPressureSensorExcelService,
+    'ТЕРМОМЕТР СОПРОТИВЛЕНИЯ': {
+        'Pt100': CompletionThermalResistancePT100Service,
+        '100П': CompletionThermalResistance100PService,
+    },
+    'МАНОМЕТРЫ': CompletionPressureGaugeExcelService,
+    'ТЕПЛОСЧЕТЧИК': MainHeatMeterService,
+    'ТЕПЛОВЫЧИСЛИТЕЛЬ': MainHeatCalculatorService,
+    'СЧЕТЧИК ГАЗА': MainGasMeterService,
+    'РАСХОДОМЕР': MainFlowMeterService
+}
 
 
 class MainService(Service):
@@ -32,40 +46,15 @@ class MainService(Service):
 
     def run_service(self):
         measuring_instrument = self.registry_exists().measuring_instrument.name
-        if measuring_instrument == 'ДАТЧИК ДАВЛЕНИЯ':
-            return CompletionPressureSensorExcelService.execute(
-                {'registry': self._get_registry},
-                {'file': self.cleaned_data['file']}
-            )
-        elif measuring_instrument == 'ТЕРМОМЕТР СОПРОТИВЛЕНИЯ':
+        if measuring_instrument == 'ТЕРМОМЕТР СОПРОТИВЛЕНИЯ':
             type_of_measuring_instrument = self._get_type_thermal_resistance
-            if type_of_measuring_instrument == 'Pt100':
-                return CompletionThermalResistancePT100Service.execute(
-                    {'registry': self._get_registry},
-                    {'file': self.cleaned_data['file']}
-                )
-            elif type_of_measuring_instrument == '100П':
-                return CompletionThermalResistance100PService.execute(
-                    {'registry': self._get_registry},
-                    {'file': self.cleaned_data['file']}
-                )
-        elif measuring_instrument == 'МАНОМЕТРЫ':
-            return CompletionPressureGaugeExcelService.execute(
+            return SERVICES_DICT[measuring_instrument][
+                type_of_measuring_instrument].execute(
                 {'registry': self._get_registry},
                 {'file': self.cleaned_data['file']}
             )
-        elif measuring_instrument == 'ТЕПЛОСЧЕТЧИК':
-            return MainHeatMeterService.execute(
-                {'registry': self._get_registry},
-                {'file': self.cleaned_data['file']}
-            )
-        elif measuring_instrument == 'ТЕПЛОВЫЧИСЛИТЕЛЬ':
-            return MainHeatCalculatorService.execute(
-                {'registry': self._get_registry},
-                {'file': self.cleaned_data['file']}
-            )
-        elif measuring_instrument == 'СЧЕТЧИК ГАЗА':
-            return MainGasMeterService.execute(
+        else:
+            return SERVICES_DICT[measuring_instrument].execute(
                 {'registry': self._get_registry},
                 {'file': self.cleaned_data['file']}
             )
