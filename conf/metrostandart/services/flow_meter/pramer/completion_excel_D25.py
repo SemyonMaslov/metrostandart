@@ -26,10 +26,15 @@ class CompletionFlowMeterD25Pramer4Service(Service):
         return self.cleaned_data['path']
 
     def coppy_excel_file(self):
-        source_path = os.path.join(BASE_DIR,
-                                   'data\\flow_meter\\Эмир-Прамер-550\\рандом\\Прамер ДУ-25.xlsx')
-        self.cleaned_data['path'] = os.path.join(BASE_DIR,
-                                                 f"uploads\\flow_meter\\flow_meter{datetime.datetime.now().strftime('%Y-%m-%d_%H-%M-%S')}.xlsx")
+        source_path = os.path.join(os.path.dirname(__file__), '..', '..', '..',
+                                   '..', 'data', 'flow_meter',
+                                   'Эмир-Прамер-550', 'рандом',
+                                   'Прамер ДУ-25.xlsx')
+        self.cleaned_data['path'] = os.path.join(os.path.dirname(__file__),
+                                                 '..', '..', '..',
+                                                 '..', 'uploads', 'flow_meter',
+                                                 f'flow_meter{datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S")}.xlsx',
+                                                 )
         shutil.copy(source_path, self.cleaned_data['path'])
 
     def completion_excel_file(self):

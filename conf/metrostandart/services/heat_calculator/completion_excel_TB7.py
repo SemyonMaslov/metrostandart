@@ -26,10 +26,14 @@ class CompletionHeatCalculatorTB7Service(Service):
         return self.cleaned_data['path']
 
     def coppy_excel_file(self):
-        source_path = os.path.join(BASE_DIR,
-                                   'data\\heat_calculator\\ТВ7.xlsx')
-        self.cleaned_data['path'] = os.path.join(BASE_DIR,
-                                                 f"uploads\\heat_calculator\\heat_calculator{datetime.datetime.now().strftime('%Y-%m-%d_%H-%M-%S')}.xlsx")
+        source_path = os.path.join(os.path.dirname(__file__), '..', '..', '..',
+                                   'data', 'heat_calculator',
+                                   'ТВ7.xlsx')
+        self.cleaned_data['path'] = os.path.join(os.path.dirname(__file__),
+                                                 '..', '..', '..', 'uploads',
+                                                 'heat_calculator',
+                                                 f'heat_calculator{datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S")}.xlsx',
+                                                 )
         shutil.copy(source_path, self.cleaned_data['path'])
 
     def completion_excel_file(self):

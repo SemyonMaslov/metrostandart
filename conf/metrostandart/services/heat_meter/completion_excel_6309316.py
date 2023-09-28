@@ -26,10 +26,14 @@ class CompletionHeatMeter6309316Service(Service):
         return self.cleaned_data['path']
 
     def coppy_excel_file(self):
-        source_path = os.path.join(BASE_DIR,
-                                   'data\\heat_meter\\63093-16; 61496-15.xlsx')
-        self.cleaned_data['path'] = os.path.join(BASE_DIR,
-                                                 f"uploads\\heat_meter\\heat_meter_{datetime.datetime.now().strftime('%Y-%m-%d_%H-%M-%S')}.xlsx")
+        source_path = os.path.join(os.path.dirname(__file__), '..', '..', '..',
+                                   'data', 'heat_meter',
+                                   '63093-16; 61496-15.xlsx')
+        self.cleaned_data['path'] = os.path.join(os.path.dirname(__file__),
+                                                 '..', '..', '..', 'uploads',
+                                                 'heat_meter',
+                                                 f'heat_meter{datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S")}.xlsx',
+                                                 )
         shutil.copy(source_path, self.cleaned_data['path'])
 
     def completion_excel_file(self):

@@ -26,9 +26,14 @@ class CompletionPressureGaugeExcelService(Service):
         return self.cleaned_data['path']
 
     def coppy_excel_file(self):
-        source_path = os.path.join(BASE_DIR, 'data\\pressure_gauge\\МТ.xlsx')
-        self.cleaned_data['path'] = os.path.join(BASE_DIR,
-                                                 f"uploads\\pressure_gauge\\pressure_gauge_{datetime.datetime.now().strftime('%Y-%m-%d_%H-%M-%S')}.xlsx")
+        source_path = os.path.join(os.path.dirname(__file__), '..', '..', '..',
+                                   'data', 'pressure_gauge',
+                                   'МТ.xlsx')
+        self.cleaned_data['path'] = os.path.join(os.path.dirname(__file__),
+                                                 '..', '..', '..', 'uploads',
+                                                 'pressure_gauge',
+                                                 f'pressure_gauge{datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S")}.xlsx',
+                                                 )
         shutil.copy(source_path, self.cleaned_data['path'])
 
     def completion_excel_file(self):

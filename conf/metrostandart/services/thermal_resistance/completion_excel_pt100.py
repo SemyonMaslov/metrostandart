@@ -26,10 +26,14 @@ class CompletionThermalResistancePT100Service(Service):
         return self.cleaned_data['path']
 
     def coppy_excel_file(self):
-        source_path = os.path.join(BASE_DIR,
-                                   'data\\thermal_resistance\\Pt100.xlsx')
-        self.cleaned_data['path'] = os.path.join(BASE_DIR,
-                                                 f"uploads\\thermal_resistance\\thermal_resistance_{datetime.datetime.now().strftime('%Y-%m-%d_%H-%M-%S')}.xlsx")
+        source_path = os.path.join(os.path.dirname(__file__), '..', '..', '..',
+                                   'data', 'thermal_resistance',
+                                   'Pt100.xlsx')
+        self.cleaned_data['path'] = os.path.join(os.path.dirname(__file__),
+                                                 '..', '..', '..', 'uploads',
+                                                 'thermal_resistance',
+                                                 f'thermal_resistance{datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S")}.xlsx',
+                                                 )
         shutil.copy(source_path, self.cleaned_data['path'])
 
     def completion_excel_file(self):
