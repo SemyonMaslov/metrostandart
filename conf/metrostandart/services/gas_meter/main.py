@@ -2,21 +2,11 @@ from PyPDF2 import PdfReader
 from django import forms
 from service_objects.services import Service
 
-from metrostandart.services.gas_meter.completion_excel_G10 import (
-    CompletionGasMeterG10Service
-)
-from metrostandart.services.gas_meter.completion_excel_G16 import (
-    CompletionGasMeterG16Service
-)
-from metrostandart.services.gas_meter.completion_excel_G25 import (
-    CompletionGasMeterG25Service
-)
-from metrostandart.services.gas_meter.completion_excel_G4 import (
-    CompletionGasMeterG4Service
-)
-from metrostandart.services.gas_meter.completion_excel_G6 import (
-    CompletionGasMeterG6Service
-)
+from metrostandart.services.gas_meter.completion_excel_G10 import CompletionGasMeterG10Service
+from metrostandart.services.gas_meter.completion_excel_G16 import CompletionGasMeterG16Service
+from metrostandart.services.gas_meter.completion_excel_G25 import CompletionGasMeterG25Service
+from metrostandart.services.gas_meter.completion_excel_G4 import CompletionGasMeterG4Service
+from metrostandart.services.gas_meter.completion_excel_G6 import CompletionGasMeterG6Service
 from metrostandart.utils import collection_data
 
 SERVICES_DICT = {

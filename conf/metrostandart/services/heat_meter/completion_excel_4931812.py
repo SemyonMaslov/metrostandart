@@ -8,7 +8,6 @@ from django import forms
 from service_objects.services import Service
 from PyPDF2 import PdfReader
 
-from conf.settings import BASE_DIR
 from metrostandart.models import Document
 from metrostandart.utils import collection_data
 

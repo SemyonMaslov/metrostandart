@@ -8,17 +8,12 @@ from service_objects.services import Service
 from metrostandart.models import Registry
 from metrostandart.services.flow_meter.main import MainFlowMeterService
 from metrostandart.services.gas_meter.main import MainGasMeterService
-from metrostandart.services.heat_calculator.main import \
-    MainHeatCalculatorService
+from metrostandart.services.heat_calculator.main import MainHeatCalculatorService
 from metrostandart.services.heat_meter.main import MainHeatMeterService
-from metrostandart.services.pressure_gauge.completion_excel import \
-    CompletionPressureGaugeExcelService
-from metrostandart.services.pressure_sensor.completion_excel import \
-    CompletionPressureSensorExcelService
-from metrostandart.services.thermal_resistance.completion_excel_100p import \
-    CompletionThermalResistance100PService
-from metrostandart.services.thermal_resistance.completion_excel_pt100 import \
-    CompletionThermalResistancePT100Service
+from metrostandart.services.pressure_gauge.completion_excel import CompletionPressureGaugeExcelService
+from metrostandart.services.pressure_sensor.completion_excel import CompletionPressureSensorExcelService
+from metrostandart.services.thermal_resistance.completion_excel_100p import CompletionThermalResistance100PService
+from metrostandart.services.thermal_resistance.completion_excel_pt100 import CompletionThermalResistancePT100Service
 
 SERVICES_DICT = {
     'ДАТЧИК ДАВЛЕНИЯ': CompletionPressureSensorExcelService,
@@ -38,9 +33,9 @@ class MainService(Service):
     file = forms.FileField()
 
     def process(self):
+        self.validate_file_type()
         self.text = PdfReader(self.cleaned_data['file']).pages[
             0].extract_text().replace('\n', ' ').replace('_', '')
-        self.validate_file_type()
         self.registry_exists()
         return self.run_service()
 

@@ -1,5 +1,5 @@
 body {
-  background-image: url(../images/breaking.png);
+  background-image: url(./images/breaking.png);
 }
 .main {
   max-width: 917px;
@@ -111,4 +111,79 @@ label {
   line-height: normal;
   text-decoration-line: underline;
   align-self: flex-start;
+}
+@media (max-width: 768px) {
+  .header .buttons {
+    display: none;
+  }
+  .footer .buttons {
+    display: none;
+  }
+  label {
+    align-self: flex-start;
+  }
+}
+@media (max-width: 600px) {
+  .from-tabs a {
+    font-size: 18px;
+  }
+  .form-login {
+    padding: 30px 40px;
+  }
+  .input-label p {
+    font-size: 18px;
+  }
+}
+@media (max-width: 450px) {
+  .from-tabs a {
+    font-size: 14px;
+  }
+  .form-login {
+    padding: 30px 40px;
+  }
+  .input-label p {
+    font-size: 14px;
+  }
+  .fogot,
+  label,
+  .link-sogl {
+    font-size: 14px;
+  }
+  .form-login {
+    border-radius: 25px;
+  }
+}
+@media (max-width: 400px) {
+  .from-tabs a {
+    font-size: 12px;
+  }
+  .form-login {
+    padding: 30px 40px;
+  }
+  .input-label p {
+    font-size: 12px;
+  }
+  .fogot,
+  label,
+  .link-sogl {
+    font-size: 12px;
+  }
+  .form-login {
+    border-radius: 25px;
+  }
+  .form-login button {
+    margin-top: 20px;
+    height: 40px;
+    font-size: 14px;
+  }
+  .input-label .input {
+    height: 40px;
+  }
+  .main {
+    height: 50vh;
+  }
+  body {
+    max-height: 100vh;
+    overflow-y: hidden;
+  }
 }

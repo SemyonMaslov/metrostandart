@@ -5,39 +5,40 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <link rel="stylesheet" href="{% static 'css/header.css'%}" />
-    <link rel="stylesheet" href="{% static 'css/normalize.css'%}" />
+    <link rel="stylesheet" href="{% static 'header.css' %}" />
+    <link rel="stylesheet" href="{% static 'normalize.css' %}" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Manrope:wght@200;300;400;500;600;700;800&family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap"
       rel="stylesheet" />
-    <link rel="stylesheet" href="{% static 'css/login.css'%}" />
+    <link rel="stylesheet" href="{% static 'login.css' %}" />
   </head>
   <body>
     <header class="header">
-      <a href="{% url 'home'%}">
-        <img src="{% static 'images/icon.svg'%}" alt="" />
+      <a href="{% url 'home' %}" class="header-image">
+        <img src="{% static 'images/icon.svg' %}" alt="" />
       </a>
       <div class="buttons">
-        <a class="header-link" href="{% url 'login'%}">ВОЙТИ</a>
-        <a class="header-button" href="{% url 'register'%}">РЕГИСТРАЦИЯ</a>
+        <a class="header-link" href="{% url 'login' %}">ВОЙТИ</a>
+        <a class="header-button" href="{% url 'register' %}">РЕГИСТРАЦИЯ</a>
       </div>
     </header>
     <div class="main">
-      <form action="" class="form-login">
+      <form action="{% url 'login' %}" class="form-login" method="post">
+        {% csrf_token %}
         <div class="from-tabs">
-          <a href="{% url 'login'%}" class="active">ВОЙТИ</a>
-          <a href="{% url 'register'%}" class="non-active">ЗАРЕГИСТРИРОВАТЬСЯ</a>
+          <a href="{% url 'login' %}" class="active">ВОЙТИ</a>
+          <a href="{% url 'register' %}" class="non-active">ЗАРЕГИСТРИРОВАТЬСЯ</a>
         </div>
         <div class="main-inputs">
           <div class="input-label">
             <p>Логин</p>
-            <input class="input" type="text" name="" id="" />
+            <input class="input" type="text" name="login" id="" />
           </div>
           <div class="input-label">
             <p>Пароль</p>
-            <input class="input" type="password" name="" id="" />
+            <input class="input" type="password" name="password" id="" />
             <label for="check">
               <input type="checkbox" name="check" id="" />
               Запомнить
@@ -45,20 +46,21 @@
           </div>
         </div>
         <button>ВОЙТИ</button>
+        <p class="fogot">{{error}}</p>
 <!--        <a href="" class="fogot">Забыли пароль?</a>-->
       </form>
     </div>
     <footer class="footer">
-      <a href="{% url 'home'%}">
-        <img src="{% static 'images/image 5.svg'%}" alt="" />
+      <a href="{% url 'home' %}" class="header-image">
+        <img src="{% static 'images/image 5.svg' %}" alt="" />
         <div>
           <h3>МЕТРОСТАНДАРТ</h3>
           <p>МЕТРОЛОГИЧЕСКАЯ ЛАБОРАТОРИЯ</p>
         </div>
       </a>
       <div class="buttons">
-        <a class="footer-link" href="{% url 'login'%}">ВОЙТИ</a>
-        <a class="footer-button" href="{% url 'register'%}">РЕГИСТРАЦИЯ</a>
+        <a class="footer-link" href="{% url 'login' %}">ВОЙТИ</a>
+        <a class="footer-button" href="{% url 'register' %}">РЕГИСТРАЦИЯ</a>
       </div>
     </footer>
   </body>

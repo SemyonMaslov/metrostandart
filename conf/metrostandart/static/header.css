@@ -1,6 +1,6 @@
 .header {
   width: 100%;
-  background-image: url(../images/header.svg);
+  background-image: url(./images/header.svg);
   background-position: center;
   background-size: cover;
   display: flex;
@@ -111,7 +111,7 @@
 }
 .footer {
   width: 100%;
-  background-image: url(../images/footer.svg);
+  background-image: url(./images/footer.svg);
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
@@ -172,6 +172,13 @@
   padding-top: 5px;
   justify-content: center;
 }
+.adaptive {
+  display: none;
+}
+.main {
+  align-items: center;
+}
+
 @media (max-width: 1000px) {
   .form {
     width: 45%;
@@ -263,9 +270,80 @@
     height: 300px;
   }
   body {
-    background-image: url(../images/breaking.png);
+    background-image: url(./images/breaking.png);
+    background-size: cover;
+    background-position: center;
   }
   .main {
     background-color: transparent;
+  }
+}
+
+@media (max-width: 768px) {
+  .main {
+    flex-direction: column;
+  }
+  .form {
+    width: 100%;
+  }
+  .image {
+    width: 100%;
+  }
+  .header {
+    height: 350px;
+  }
+  .header img {
+    width: 100%;
+  }
+  .header-image {
+    width: 50%;
+  }
+  .footer a {
+    gap: 20px;
+  }
+  .header-image h3 {
+    font-size: 20px;
+  }
+  .header-image p {
+    font-size: 14px;
+  }
+  .footer .header-image img {
+    width: 33%;
+  }
+}
+@media (max-width: 550px) {
+  .header-image h3 {
+    font-size: 16px;
+  }
+  .header-image p {
+    font-size: 10px;
+  }
+}
+
+@media (max-width: 450px) {
+  .main {
+    padding: 0 20px;
+  }
+  .form {
+    width: 100%;
+  }
+  .image {
+    width: 100%;
+  }
+  .header {
+    height: 200px;
+    background-image: url(./images/header-adaptive.svg);
+  }
+  .header img {
+    width: 100%;
+  }
+  .header-image {
+    width: 50%;
+  }
+  .buttons {
+    display: none;
+  }
+  .adaptive {
+    display: block;
   }
 }

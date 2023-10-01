@@ -8,12 +8,11 @@ from django import forms
 from service_objects.services import Service
 from PyPDF2 import PdfReader
 
-from conf.settings import BASE_DIR
 from metrostandart.models import Document
 from metrostandart.utils import collection_data
 
 
-class CompletionFlowMeterVzletD104Service(Service):
+class CompletionFlowMeterVzletD10Service(Service):
     file = forms.FileField()
     registry = forms.CharField()
 
@@ -42,13 +41,13 @@ class CompletionFlowMeterVzletD104Service(Service):
         sheet = book.active
         data = collection_data(self.text)
         sheet['C5'].value = data['verification']
-        sheet['G5'].value = data['date'][2]
+        sheet['G5'].value = data['date'][1]
         sheet['B6'].value = data['measuring_instrument']
         sheet['C7'].value = data['factory_number']
         sheet['H7'].value = self.cleaned_data['registry']
         sheet['D9'].value = data['accordance']
         sheet['C14'].value = data['facts']
-        sheet['C45'].value = data['date'][2]
+        sheet['C45'].value = data['date'][1]
         sheet['C47'].value = data['verifier']
         book.save(self.cleaned_data['path'])
 

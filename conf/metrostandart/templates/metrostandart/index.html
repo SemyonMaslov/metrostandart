@@ -1,56 +1,69 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Document</title>
-    <link rel="stylesheet" href="{% static 'css/header.css'%}" />
-    <link rel="stylesheet" href="{% static 'css/normalize.css'%}" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="{% static 'header.css' %}"/>
+    <link rel="stylesheet" href="{% static 'normalize.css' %}"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Manrope:wght@200;300;400;500;600;700;800&family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap"
-      rel="stylesheet" />
-  </head>
-  <body>
-    <header class="header">
-      <a href="{% url 'home'%}">
-        <img src="{% static 'images/icon.svg'%}" alt="" />
-      </a>
-      <div class="buttons">
-        <a class="header-link" href="{% url 'login'%}">ВОЙТИ</a>
-        <a class="header-button" href="{% url 'register'%}">РЕГИСТРАЦИЯ</a>
-      </div>
-    </header>
-    <div class="main">
-      <img class="image" src="{% static 'images/Group_549_1_1_1_1_1_ 1.png'%}" alt="" />
-      <form action="{% url 'document' %}" class="form" enctype="multipart/form-data" method="post">
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Manrope:wght@200;300;400;500;600;700;800&family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap"
+            rel="stylesheet"/>
+</head>
+<body>
+<header class="header">
+    <a href="{% url 'home' %}" class="header-image">
+        <img src="{% static 'images/icon.svg' %}" alt=""/>
+    </a>
+    <div class="buttons">
+        {% if user.is_authenticated %}
+        <p class="header-link">{{user.username}}</p>
+        <a href="{% url 'logout' %}" class="header-button">Выйти</a>
+        {% else %}
+        <a class="header-link" href="{% url 'login' %}">ВОЙТИ</a>
+        <a class="header-button" href="{% url 'register' %}">РЕГИСТРАЦИЯ</a>
+        {% endif %}
+    </div>
+</header>
+<div class="main">
+    <img class="image" src="{% static 'images/Group_549_1_1_1_1_1_ 1.png' %}" alt=""/>
+    <form action="{% url 'document' %}" class="form" method="post" enctype="multipart/form-data">
         {% csrf_token %}
         <h2>Служба поверки и Метрологическая лаборатория</h2>
         <p>
-          Наша компания оказывает полный спектр услуг по поверке личных
-          счётчиков жильцов и по поверке метрологического оборудования
+            Наша компания оказывает полный спектр услуг по поверке личных
+            счётчиков жильцов и по поверке метрологического оборудования
         </p>
         <div class="form-buttons">
-          <input name="file" type="file" class="form-button">ВЫБРАТЬ ФАЙЛ</input>
-          <button class="form-button">СКАЧАТЬ ПОВЕРКУ</button>
-          {{error}}
+            <input required type="file" name="file" id="fileInput" style="display: none"/>
+            <button
+                    onclick="document.getElementById('fileInput').click();"
+                    class="form-button" type="button">
+                ВЫБРАТЬ ФАЙЛ
+            </button>
+            <button class="form-button">СКАЧАТЬ ПОВЕРКУ</button>
+            <button class="form-button adaptive">АВТОРИЗАЦИЯ</button>
+            <p style="color:red">{{error}}</p>
         </div>
-      </form>
-    </div>
-    <footer class="footer">
-      <a href="{% url 'home'%}">
-        <img src="{% static 'images/image 5.svg'%}" alt="" />
+    </form>
+</div>
+<footer class="footer">
+    <a href="{% url 'home' %}" class="header-image">
+        <img src="{% static 'images/image 5.svg' %}" alt=""/>
         <div>
-          <h3>МЕТРОСТАНДАРТ</h3>
-          <p>МЕТРОЛОГИЧЕСКАЯ ЛАБОРАТОРИЯ</p>
+            <h3>МЕТРОСТАНДАРТ</h3>
+            <p>МЕТРОЛОГИЧЕСКАЯ ЛАБОРАТОРИЯ</p>
         </div>
-      </a>
-      <div class="buttons">
-        <a class="footer-link" href="{% url 'login'%}">ВОЙТИ</a>
-        <a class="footer-button" href="{% url 'register'%}">РЕГИСТРАЦИЯ</a>
-      </div>
-    </footer>
-  </body>
+    </a>
+    <div class="buttons">
+        {% if not  user.is_authenticated %}
+        <a class="footer-link" href="{% url 'login' %}">ВОЙТИ</a>
+        <a class="footer-button" href="{% url 'register' %}">РЕГИСТРАЦИЯ</a>
+        {% endif %}
+    </div>
+</footer>
+</body>
 </html>
